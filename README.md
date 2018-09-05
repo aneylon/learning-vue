@@ -10,4 +10,6 @@ https://cdn.jsdelivr.net/npm/vue
 
 https://unpkg.com/vue
 
+https://cli.vuejs.org/
+
 https://github.com/ecofic/course-vue-getting-started
