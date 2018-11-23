@@ -65,3 +65,17 @@ var app7 = new Vue({
     ]
   }
 })
+
+var app8 = new Vue({
+  el: '#app-8',
+  data: {
+    oneStyle: {
+      'background-color': 'red'
+    },
+    aColor : 'blue',
+    swatches : [
+      {id: 0, color: 'red', compliment: 'green'},
+      {id: 1, color: 'blue', compliment: 'orange'}
+    ]
+  }
+})

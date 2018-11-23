@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="app">
@@ -50,6 +51,25 @@
         v-bind:key="item.id">
       </todo-item>
     </ol>
+  </div>
+
+  <div id="app-8">
+    <div class="swatch" v-bind:style="{backgroundColor: aColor}">
+      {{aColor}}
+    </div>
+    <div class="swatch" :style="oneStyle">
+      {{oneStyle}}
+    </div>
+    <ul>
+      <li v-for="swatch in swatches">
+        <div class="swatch" :style="{backgroundColor: swatch.color}">
+          {{swatch.color}}
+          <div class="compliment" :style="{backgroundColor: swatch.compliment}">
+            {{swatch.compliment}}
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
