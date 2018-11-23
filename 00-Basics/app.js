@@ -79,3 +79,10 @@ var app8 = new Vue({
     ]
   }
 })
+
+var app9 = new Vue({
+  el: '#app-9',
+  data: {
+    show: true
+  }
+})

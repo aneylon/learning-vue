@@ -72,6 +72,15 @@
     </ul>
   </div>
 
+  <div id="app-9">
+    <button v-on:click="show = !show">
+      Toggle
+    </button>
+    <transition name="fade">
+      <p v-if="show">hello</p>
+    </transition>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="app.js"></script>
 </body>
