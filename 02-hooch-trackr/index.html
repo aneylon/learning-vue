@@ -18,6 +18,22 @@
       v-bind:title="appName"
       v-bind:src="appLogo"
     />
+    <input
+      v-model="searchString"
+      placeholder="search"
+      type="text">
+    <button
+      @click="searchEntries"  
+    >
+      Search
+    </button>
+    <ul>
+      <list-item
+        v-for="item in entries"
+        v-bind:item="item"
+        v-bind:key="item.id"
+      ></list-item>
+    </ul>
   </div>
 
   <script src="https://unpkg.com/vue"></script>
