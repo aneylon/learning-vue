@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Basics</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app-8">
+    <ul>
+      <li v-for="item in items">
+        <input type="number" v-model.number="item.quantity">
+        <span>{{ item.name }}</span>
+        <span v-if="item.quantity === 0">
+          -- No Mas --
+        </span>
+      </li>
+    </ul>
+
+    <h2>Total items : {{ totalItems }}</h2>
+    <div>
+      <input type="text" v-model="newItem.name">
+      <input type="text" v-model="newItem.quantity">
+      <button @click="addNewItem">Add New Item</button>
+    </div>
+  </div>
+  <script>
+    
+    let app8 = new Vue({
+      el: '#app-8',
+      data: {
+        items: [],
+        newItem: { name: '', quantity: 0 }
+      },
+      methods: {
+        addNewItem: function() {
+          this.items.push({
+            name:this.newItem.name,
+            quantity: Number(this.newItem.quantity) || 0
+          })
+          this.newItem.name = ''
+          this.newItem.quantity = 0
+        }
+      },
+      computed: {
+        totalItems () {
+          return this.items.reduce((acc, item) => {
+            return acc + item.quantity
+          }, 0)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
