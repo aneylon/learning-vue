@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Basics</title>
+  <style>
+    .item-completed {
+      text-decoration: line-through;
+      color:gray;
+    }
+  </style>
+</head>
+<body>
+  <div id="todo-mvc">
+    <h2>{{ title }}</h2>
+    <input v-model="newItem.text" />
+    <button @click="addNewItem">Add todo</button>
+
+    <div>
+      <a href="#" @click="setFilter('completed')">Completed</a>
+      <a href="#" @click="setFilter('open')">Open</a>
+      <a href="#" @click="setFilter('all')">All</a>
+    </div>
+
+    <ul>
+      <todo-item
+        v-for="item in filteredItems"
+        v-bind:item="item"
+        v-bind:key="item.id"
+        v-bind:class="{ 'item-completed' : item.completed }"
+      >
+      </todo-item>
+    </ul>
+
+  </div> 
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  
+  <script>
+    Vue.component('todo-item', {
+      props: ['item'],
+      template: `
+        <li>
+          <span>{{ item.text }}</span>
+          <input type="checkbox" v-model="item.completed" />
+        </li>
+        `
+    })
+    let todo_mvc = new Vue({
+      el: '#todo-mvc',
+      data: {
+        title: 'Vue Todo',
+        items: [
+          { id: 0, text: 'finish this app.', completed: false }
+        ],
+        newItem: { text: '' },
+        filter: 'all'
+      },
+      methods: {
+        addNewItem: function(){
+          this.items.push({
+            id: this.items.length,
+            text: this.newItem.text,
+            completed: false
+          })
+          this.newItem.text = ''
+        },
+        setFilter(filter) {
+          this.filter = filter
+          console.log('filter', filter, 'this filter', this.filter)
+        }
+      },
+      computed: {
+        filteredItems: function(){
+          if(this.filter === 'all'){
+            console.log(this.filter, this.items)
+            return this.items
+          }
+          else if (this.filter === 'completed')
+            return this.items.filter( item => item.completed === true )
+          else if (this.filter === 'open')
+            return this.items.filter( item => item.completed === false )
+        }
+      }
+    })
+  </script>
+</body>
+</html>
