@@ -34,6 +34,22 @@
                 })
             }
         })
+        
+        function shuffle(arr){
+            let output = arr.slice()
+            for(let i = 0; i < output.length; i++){
+                let randomIndex = randomNumber(output.length)
+                let one = output[i]
+                let two = output[randomIndex]
+                output[i] = two
+                output[randomIndex] = one
+            }
+            return output
+        }
+
+        function randomNumber(max){
+            return Math.floor(Math.random() * max)
+        }
     </script>
 </body>
 </html>
