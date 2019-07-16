@@ -11,12 +11,10 @@
     <div id="app">
         <h1>{{title}}</h1>
         <ul>
-            <li v-for="mc in multipleChoice">
-                <p>{{mc.question}}</p>
-                <p v-for="wrongAnswer in mc.wrongAnswers">
-                    {{wrongAnswer}}
-                </p>
-                p{{{mc.correctAnswer}}}
+            <li v-for="card in cards">
+                    <p>{{ card.question }}</p>
+                    <p>{{ card.answer }}</p>
+                    <p>{{ card.explain }}</p>
             </li>
         </ul>   
     </div>
@@ -25,14 +23,14 @@
         var app = new Vue({
             el: '#app',
             data: {
-                title: 'multiple choice',
-                multipleChoice: []
+                title: 'flash cards',
+                cards: []
             },
             created() {
                 fetch('https://api.myjson.com/bins/owerv')
                 .then(response => response.json())
                 .then(json => {
-                    this.multipleChoice = json
+                    this.cards = json
                 })
             }
         })
@@ -51,24 +49,6 @@
 
         function randomNumber(max){
             return Math.floor(Math.random() * max)
-        }
-
-        var mcStructOne = {
-            question: "A question",
-            wrongAnswers: ['wrong one', 'wrong two', 'wrong three'],
-            correctAnswer: 'correct answer',
-            explanation: 'an explanation'
-        }
-
-        var mcStructTwo = {
-            questions: ["A question.", "Another question."],
-            answers: [
-                { text: 'wrong one', correct: false},
-                { text: 'wrong two', correct: false},
-                { text: 'wrong three', correct: false},
-                { text: 'correct one', correct: true}
-                ],
-            explanations: ['An explanation.', 'Another explanation.']
         }
     </script>
 </body>
