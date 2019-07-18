@@ -10,6 +10,20 @@
 <body>
     <div id="app">
         <h1>{{title}}</h1>
+
+        <div id="currentCard">
+            <p>{{ currentCard.question }}</p>
+            <p>{{ currentCard.answer }}</p>
+            <p>{{ currentCard.explain }}</p>
+        </div>
+
+        <div>
+            <button @click="knowCard">Know</button>
+            <button @click="notSureCard">Not Sure</button>
+            <button @click="dontKnowCard">Don't Know</button>
+        </div>
+
+
         <ul>
             <li v-for="card in cards">
                     <p>{{ card.question }}</p>
@@ -24,14 +38,32 @@
             el: '#app',
             data: {
                 title: 'flash cards',
-                cards: []
+                cards: [],
+                currentCard: {}
+            },
+            methods: {
+                knowCard: function() {
+                    console.log('know card')
+                },
+                notSureCard: function() {
+                    console.log('not sure card')
+                },
+                dontKnowCard: function() {
+                    console.log('dont know card')
+                },
+                getCards: function(){
+                    fetch('https://api.myjson.com/bins/owerv')
+                    .then(response => response.json())
+                    .then(json => {
+                        this.cards = shuffle(json)
+                    })
+                    .then(() => {
+                        this.currentCard = this.cards[0]
+                    })
+                }
             },
             created() {
-                fetch('https://api.myjson.com/bins/owerv')
-                .then(response => response.json())
-                .then(json => {
-                    this.cards = json
-                })
+                this.getCards()
             }
         })
         
