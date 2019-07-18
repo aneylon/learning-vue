@@ -27,10 +27,12 @@
                 cards: []
             },
             created() {
-                fetch('https://api.myjson.com/bins/owerv')
+                fetch('https://api.myjson.com/bins/14kl4d')
+                // https://api.myjson.com/bins/owerv
+                // https://api.myjson.com/bins/14kl4d
                 .then(response => response.json())
                 .then(json => {
-                    this.cards = json
+                    this.cards = shuffle(json)
                 })
             }
         })
