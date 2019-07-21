@@ -12,9 +12,11 @@
         <h1>{{title}}</h1>
 
         <div id="currentCard">
-            <p>{{ currentCard.question }}</p>
-            <p>{{ currentCard.answer }}</p>
-            <p>{{ currentCard.explain }}</p>
+            <p @click="toggleShowAnswer">{{ currentCard.question }}</p>
+            <div v-show="canViewAnswer">
+                <p>{{ currentCard.answer }}</p>
+                <p>{{ currentCard.explain }}</p>
+            </div>
         </div>
 
         <div>
@@ -39,9 +41,13 @@
             data: {
                 title: 'flash cards',
                 cards: [],
-                currentCard: {}
+                currentCard: {},
+                canViewAnswer: false
             },
             methods: {
+                toggleShowAnswer () {
+                    this.canViewAnswer = !this.canViewAnswer
+                },
                 knowCard: function() {
                     console.log('know card')
                 },
