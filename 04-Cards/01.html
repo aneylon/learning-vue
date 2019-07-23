@@ -42,7 +42,10 @@
                 title: 'flash cards',
                 cards: [],
                 currentCard: {},
-                canViewAnswer: false
+                canViewAnswer: false,
+                knownCards: [],
+                notSureCards: [],
+                unknownCards: []
             },
             methods: {
                 toggleShowAnswer () {
@@ -50,23 +53,38 @@
                 },
                 knowCard: function() {
                     console.log('know card')
+                    this.knownCards.push(this.currentCard)
+                    this.getNextCard()
                 },
                 notSureCard: function() {
                     console.log('not sure card')
+                    this.notSureCards.push(this.currentCard)
+                    this.getNextCard()
                 },
                 dontKnowCard: function() {
                     console.log('dont know card')
+                    this.unknownCards.push(this.currentCard)
+                    this.getNextCard()
+                },
+                getNextCard(){
+                    if(this.cards.length)
+                        return this.cards.shift()
+
+                    // if no more cards
+                    // shuffle each pile then add back to cards
+                    // empty each pile
+                    // notify user?
                 },
                 getCards: function(){
-                    fetch('https://api.myjson.com/bins/owerv')
+                    fetch('https://api.myjson.com/bins/14kl4d')
                 // https://api.myjson.com/bins/owerv
-                // https://api.myjson.com/bins/14kl4d
+                // https://api.myjson.com/bins/
                     .then(response => response.json())
                     .then(json => {
                         this.cards = shuffle(json)
                     })
                     .then(() => {
-                        this.currentCard = this.cards[0]
+                        this.currentCard = this.getNextCard()
                     })
                 }
             },
