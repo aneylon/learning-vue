@@ -69,16 +69,38 @@
                 getNextCard(){
                     if(this.cards.length)
                         return this.cards.shift()
-
                     // if no more cards
-                    // shuffle each pile then add back to cards
-                    // empty each pile
                     // notify user?
+                    console.log('starting over')
+                    // shuffle each pile
+                    var shuffledKnown = shuffle(this.knownCards)
+                    var shuffledNotSure = shuffle(this.notSureCards)
+                    var shuffledUnknown = shuffle(this.unknownCards)
+                    // then add back to cards
+                    shuffledKnown.forEach(card => {
+                        console.log(card)
+                        this.cards.push(card)
+                        })
+                    shuffledNotSure.forEach(card => {
+                        console.log(card)
+                        this.cards.push(card)
+                        })
+                    shuffledUnknown.forEach(card => {
+                        console.log(card)
+                        this.cards.push(card)
+                        })
+                    
+                    // empty each pile
+                    this.knownCards = []
+                    this.notSureCards = []
+                    this.unknownCards = []
+                    
+                    return this.cards.shift()
                 },
                 getCards: function(){
                     fetch('https://api.myjson.com/bins/14kl4d')
                 // https://api.myjson.com/bins/owerv
-                // https://api.myjson.com/bins/
+                // https://api.myjson.com/bins/14kl4d
                     .then(response => response.json())
                     .then(json => {
                         this.cards = shuffle(json)
